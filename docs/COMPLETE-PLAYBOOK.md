@@ -4,11 +4,9 @@
 
 ---
 
-
-
 <!-- BEGIN DOCUMENT: README.md -->
 
-# .NET 10 Web API Modernization Playbook
+## .NET 10 Web API Modernization Playbook
 
 **Reusable, contract-first, test-first modernization framework for existing production .NET Web APIs**  
 **Version:** 1.0  
@@ -89,15 +87,13 @@ The technical guidance in this playbook is informed by these Microsoft reference
 
 **Operating principle:** Modernize the implementation, not the externally relied-upon responsibilities. Every change must be traceable to an approved plan, protected by tests, and supported by execution evidence.
 
-
 <!-- END DOCUMENT: README.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/01-recommended-strategy.md -->
 
-# 01 — Recommended modernization strategy
+## 01 — Recommended modernization strategy
 
 ## Executive recommendation
 
@@ -290,15 +286,13 @@ Implement the pilot completely and review whether the architecture, testing appr
 
 The new implementation is successful when the required capabilities and externally relied-upon contracts are preserved, all meaningful side effects are correct, security and reliability remain sound, the full validation suite passes, and any performance/maintainability improvements are evidenced. Source-code similarity to the old API is not a success criterion.
 
-
 <!-- END DOCUMENT: guides/01-recommended-strategy.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/02-stages-and-gates.md -->
 
-# 02 — Modernization stages and decision gates
+## 02 — Modernization stages and decision gates
 
 This lifecycle is intended to be repeatable for each API. The AI agent must not skip a gate because the next task appears straightforward.
 
@@ -494,15 +488,13 @@ Do not call a DEV deployment proof of production safety. DEV is an additional va
 
 **Gate 9:** QA and technical owners accept the DEV results or document remaining issues and next action.
 
-
 <!-- END DOCUMENT: guides/02-stages-and-gates.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/03-implementation-order.md -->
 
-# 03 — Recommended implementation order
+## 03 — Recommended implementation order
 
 This is the default sequence. The assessment may adjust the order based on actual dependencies, but it must explain every deviation. The sequence separates enabling work from code modernization so that the team does not remove packages before understanding the behaviours they implement.
 
@@ -624,15 +616,13 @@ A plan may move later when:
 
 Every reordering must be recorded in the decision log with reason and impact.
 
-
 <!-- END DOCUMENT: guides/03-implementation-order.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/04-target-architecture.md -->
 
-# 04 — Target architecture and design guidance
+## 04 — Target architecture and design guidance
 
 ## Design objective
 
@@ -782,15 +772,13 @@ Avoid logging tokens, credentials, sensitive payloads or unnecessarily identifia
 
 Do not migrate Controllers to Minimal APIs (or the reverse) as a side effect of removing MediatR. Keep the existing style unless a specific plan proves a benefit. API style is not the objective; correct contracts and maintainable implementation are.
 
-
 <!-- END DOCUMENT: guides/04-target-architecture.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/05-parity-and-testing.md -->
 
-# 05 — Test strategy and end-to-end parity
+## 05 — Test strategy and end-to-end parity
 
 ## Principle
 
@@ -998,15 +986,13 @@ A vertical slice is complete only when:
 - Logs/traces/metrics remain fit for operations.
 - Plan, traceability and risk records are updated.
 
-
 <!-- END DOCUMENT: guides/05-parity-and-testing.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/06-technical-modernization-decisions.md -->
 
-# 06 — Technical modernization decisions
+## 06 — Technical modernization decisions
 
 ## Starting position
 
@@ -1227,15 +1213,13 @@ Use `dotnet-counters`, `dotnet-trace`, existing APM/OpenTelemetry, load-testing 
 - [`dotnet-counters`](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-counters)
 - [`dotnet-trace`](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace)
 
-
 <!-- END DOCUMENT: guides/06-technical-modernization-decisions.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/07-engineering-rules-and-ai-guardrails.md -->
 
-# 07 — Engineering rules and AI guardrails
+## 07 — Engineering rules and AI guardrails
 
 These rules apply to every AI prompt and every implementation plan. Treat them as non-negotiable unless a named human owner approves a documented exception.
 
@@ -1346,15 +1330,13 @@ These rules apply to every AI prompt and every implementation plan. Treat them a
 
 A plan is done only when its acceptance criteria are evidenced, relevant tests pass, behavioural differences are understood and approved, documentation is updated, and the reviewer can reproduce the validation. “Code compiled” is not a definition of done.
 
-
 <!-- END DOCUMENT: guides/07-engineering-rules-and-ai-guardrails.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/08-deliverables-and-project-workspace.md -->
 
-# 08 — Deliverables and recommended workspace
+## 08 — Deliverables and recommended workspace
 
 ## Recommended documentation workspace
 
@@ -1472,15 +1454,13 @@ Use `templates/plan-template.md`. At minimum it must specify:
 
 Keep test result files, coverage, logs, parity outputs and performance artifacts in the repository's approved artifact location. Do not commit large or sensitive outputs by default. Link to CI artifacts or sanitized reports. Never commit secrets, raw production data or sensitive customer payloads.
 
-
 <!-- END DOCUMENT: guides/08-deliverables-and-project-workspace.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: guides/09-multi-api-rollout.md -->
 
-# 09 — Applying the playbook across multiple Web APIs
+## 09 — Applying the playbook across multiple Web APIs
 
 ## Recommendation
 
@@ -1557,15 +1537,13 @@ Track outcomes across APIs:
 
 Do not compare APIs solely by lines changed or package count. The strongest outcome is reduced operational and change risk with preserved business behaviour.
 
-
 <!-- END DOCUMENT: guides/09-multi-api-rollout.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/00-project-preflight.md -->
 
-# Prompt 00 — Project preflight, scope and Git safety
+## Prompt 00 — Project preflight, scope and Git safety
 
 > Run this first in the repository root. It establishes safe context; it is not permission to rewrite code.
 
@@ -1602,15 +1580,13 @@ Report:
 Never claim that a branch was created unless the Git command succeeded and you verified the current branch afterward.
 ```
 
-
 <!-- END DOCUMENT: prompts/00-project-preflight.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/01-read-only-assessment.md -->
 
-# Prompt 01 — Read-only architecture, responsibility, contract and test assessment
+## Prompt 01 — Read-only architecture, responsibility, contract and test assessment
 
 > Run after Prompt 00. This prompt must not change application or test source code.
 
@@ -1718,15 +1694,13 @@ FINAL RESPONSE
 Summarize application scope, responsibilities, API contract, dependencies, tests, known failures, critical gaps, performance evidence and unknowns. Do not propose a final architecture yet; that is the next phase. Confirm that no source/test/package/configuration files were changed.
 ```
 
-
 <!-- END DOCUMENT: prompts/01-read-only-assessment.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/02-strategy-and-plan.md -->
 
-# Prompt 02 — Architecture strategy decision and implementation planning
+## Prompt 02 — Architecture strategy decision and implementation planning
 
 > Run after the read-only assessment has sufficient evidence. This phase may create or update planning documents but must not modify application source or tests.
 
@@ -1823,15 +1797,13 @@ FINAL RESPONSE
 Provide the selected strategy and why the other options were not selected, target architecture, plan summary, sequence, risks, required approvals and measurable gates. Explicitly state whether a separate API host/project is recommended. Do not implement application code or modify tests in this phase.
 ```
 
-
 <!-- END DOCUMENT: prompts/02-strategy-and-plan.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/03-contract-first-skeleton.md -->
 
-# Prompt 03 — Contract-first skeleton and parity harness
+## Prompt 03 — Contract-first skeleton and parity harness
 
 > Run only after Prompt 02 has been reviewed and the architecture/skeleton plan has been approved.
 
@@ -1901,15 +1873,13 @@ FINAL RESPONSE
 List changed files, implemented skeleton elements, contract-test coverage, exact test results, known gaps, fake adapter safeguards, deviations and whether the skeleton gate passed. Do not claim functional parity.
 ```
 
-
 <!-- END DOCUMENT: prompts/03-contract-first-skeleton.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/04-pilot-and-vertical-slices.md -->
 
-# Prompt 04 — Pilot implementation and sequential vertical slices
+## Prompt 04 — Pilot implementation and sequential vertical slices
 
 > Run after the skeleton/parity harness gate passes. Use the same prompt for the pilot and each subsequent capability, updating the plan ID and slice scope.
 
@@ -2011,15 +1981,13 @@ FINAL RESPONSE
 Report plan ID, slice, files changed, behaviour preserved, new behaviour implemented, tests and exact commands/results, parity comparison, performance evidence, risks, documentation updates and COMPLETE/BLOCKED/FAILED status. Do not begin the next slice unless the current slice's gate is passed.
 ```
 
-
 <!-- END DOCUMENT: prompts/04-pilot-and-vertical-slices.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/05-dependency-modernization.md -->
 
-# Prompt 05 — Safe dependency and pattern modernization
+## Prompt 05 — Safe dependency and pattern modernization
 
 > Run one technology workstream at a time. Replace `<WORKSTREAM>` with MediatR, FluentValidation, FluentAssertions or direct Polly integration. Do not combine multiple package removals into one opaque change.
 
@@ -2100,15 +2068,13 @@ FINAL RESPONSE
 Provide a before/after dependency usage table, files changed, behaviours moved/preserved, tests and exact commands/results, dependency graph findings, risks and plan status. Do not start another dependency workstream automatically.
 ```
 
-
 <!-- END DOCUMENT: prompts/05-dependency-modernization.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/06-final-validation-and-dev-readiness.md -->
 
-# Prompt 06 — Full regression, parity and DEV deployment readiness
+## Prompt 06 — Full regression, parity and DEV deployment readiness
 
 > Run after every approved slice/workstream is complete. This prompt prepares readiness evidence; it does not authorize deployment.
 
@@ -2218,15 +2184,13 @@ FINAL RESPONSE
 Give an evidence-based GO / CONDITIONAL GO / NO-GO recommendation for DEV. A GO means readiness criteria have been met for DEV deployment and QA testing; it does not mean production release is approved or guaranteed safe. List every unmet criterion and every unexecuted test.
 ```
 
-
 <!-- END DOCUMENT: prompts/06-final-validation-and-dev-readiness.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: prompts/07-independent-review.md -->
 
-# Prompt 07 — Independent adversarial architecture and parity review
+## Prompt 07 — Independent adversarial architecture and parity review
 
 > Run as a separate review pass. Ideally use a fresh agent/session that did not implement the changes.
 
@@ -2301,15 +2265,13 @@ Create `reports/independent-review.md` containing:
 Do not fix issues during this pass. First report findings. Do not declare GO if there is any unresolved blocker or unexplained parity difference.
 ```
 
-
 <!-- END DOCUMENT: prompts/07-independent-review.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: templates/plan-template.md -->
 
-# PLAN-XXX — <Plan title>
+## PLAN-XXX — <Plan title>
 
 ## Status
 NOT_STARTED | ASSESSMENT_COMPLETE | APPROVED | IN_PROGRESS | BLOCKED | IMPLEMENTED_AWAITING_VALIDATION | VALIDATION_FAILED | PARITY_FAILED | COMPLETE | DEFERRED | REJECTED
@@ -2400,15 +2362,13 @@ State objective conditions required before status can become COMPLETE.
 ## 16. Implementation notes and decision history
 Record material deviations and approvals.
 
-
 <!-- END DOCUMENT: templates/plan-template.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: templates/responsibility-and-parity-matrix-template.md -->
 
-# Responsibility and parity matrix
+## Responsibility and parity matrix
 
 ## A. Responsibility inventory
 
@@ -2444,21 +2404,19 @@ Difference classification must be one of:
 |---|---|---|---|---|---|---|---|---|---|---|
 | RESP-001 | | | | | | | | | | |
 
-
 <!-- END DOCUMENT: templates/responsibility-and-parity-matrix-template.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: templates/risk-and-decision-log-template.md -->
 
-# Risks and unknowns register
+## Risks and unknowns register
 
 | ID | Type (risk/unknown/assumption) | Description | Affected responsibility/plan | Impact | Likelihood/confidence | Mitigation / investigation | Owner | Due/gate | Status |
 |---|---|---|---|---|---|---|---|---|---|
 | RISK-001 | | | | | | | | | |
 
-# Architecture / implementation decision log
+## Architecture / implementation decision log
 
 ## DEC-XXX — <Decision title>
 - Date:
@@ -2488,15 +2446,13 @@ Why is this the best fit for this API and current evidence?
 ### Evidence and references
 Link source files, tests, measurements and relevant documentation.
 
-
 <!-- END DOCUMENT: templates/risk-and-decision-log-template.md -->
 
 ---
 
-
 <!-- BEGIN DOCUMENT: templates/progress-tracker-template.md -->
 
-# Modernization progress tracker
+## Modernization progress tracker
 
 ## Project summary
 - API/project:
@@ -2536,7 +2492,6 @@ Link source files, tests, measurements and relevant documentation.
 
 ## Next action
 Describe the single next approved action and the gate it satisfies.
-
 
 <!-- END DOCUMENT: templates/progress-tracker-template.md -->
 

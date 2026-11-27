@@ -19,6 +19,7 @@
 | PAR-001 | | | | | | | | | | | | |
 
 Difference classification must be one of:
+
 - MATCH
 - REGRESSION
 - APPROVED_CHANGE

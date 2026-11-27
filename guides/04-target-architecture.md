@@ -95,6 +95,7 @@ Do not preserve a MediatR pipeline merely by copying it into a new generic pipel
 ## API contract preservation
 
 Capture and preserve:
+
 - Route templates, HTTP verbs and API versions.
 - Request/response schema, required/optional fields and null semantics.
 - Enum representation, casing, date/time formats, numeric precision and serialization settings.
@@ -136,6 +137,7 @@ Do not assume semantically similar JSON is compatible. Check clients and generat
 ## Observability
 
 Retain or improve:
+
 - Structured logs with stable event names and relevant identifiers.
 - Distributed trace propagation across HTTP, database and messaging boundaries.
 - Metrics for request rate, duration, errors and dependency health.

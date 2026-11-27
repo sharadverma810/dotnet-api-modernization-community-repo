@@ -1,0 +1,53 @@
+name: Improvement proposal
+description: Propose a new guide, prompt, decision rule, example or workflow improvement.
+title: "[Proposal]: "
+labels: ["type: enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the general problem and a reusable improvement. Keep all examples synthetic and remove identifying details.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Modernization strategy / stages
+        - Architecture decisions
+        - API contract / compatibility
+        - Testing / parity
+        - AI prompts / guardrails
+        - Dependency modernization
+        - Performance / diagnostics
+        - GitHub project / community
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What is missing, difficult or unsafe today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+      description: Describe the change and expected benefit.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or source
+      description: Add official documentation links, reproducible synthetic examples or sanitized lessons learned.
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public information check
+      options:
+        - label: I have not included secrets, personal data, proprietary code or confidential project information.
+          required: true

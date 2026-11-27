@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question or share an experience
+    url: https://github.com/OWNER/REPO/discussions
+    about: Use Discussions for questions and general experience reports, if enabled by the repository owner.
+  - name: Report a security concern
+    url: https://github.com/OWNER/REPO/security/advisories/new
+    about: Do not report security vulnerabilities in public Issues. Use private reporting when enabled.

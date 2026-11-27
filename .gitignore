@@ -25,3 +25,4 @@ secrets.json
 # Generated artifacts
 *.zip
 *.log
+/.vs

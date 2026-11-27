@@ -8,7 +8,7 @@
 
 <!-- BEGIN DOCUMENT: README.md -->
 
-# .NET 10 Web API Modernization Playbook
+## .NET 10 Web API Modernization Playbook
 
 **Reusable, contract-first, test-first modernization framework for existing production .NET Web APIs**  
 **Version:** 1.0  
@@ -95,7 +95,7 @@ The technical guidance in this playbook is informed by these Microsoft reference
 
 <!-- BEGIN DOCUMENT: guides/01-recommended-strategy.md -->
 
-# 01 — Recommended modernization strategy
+## 01 — Recommended modernization strategy
 
 ## Executive recommendation
 
@@ -294,7 +294,7 @@ The new implementation is successful when the required capabilities and external
 
 <!-- BEGIN DOCUMENT: guides/02-stages-and-gates.md -->
 
-# 02 — Modernization stages and decision gates
+## 02 — Modernization stages and decision gates
 
 This lifecycle is intended to be repeatable for each API. The AI agent must not skip a gate because the next task appears straightforward.
 
@@ -506,7 +506,7 @@ Do not call a DEV deployment proof of production safety. DEV is an additional va
 
 <!-- BEGIN DOCUMENT: guides/03-implementation-order.md -->
 
-# 03 — Recommended implementation order
+## 03 — Recommended implementation order
 
 This is the default sequence. The assessment may adjust the order based on actual dependencies, but it must explain every deviation. The sequence separates enabling work from code modernization so that the team does not remove packages before understanding the behaviours they implement.
 
@@ -636,7 +636,7 @@ Every reordering must be recorded in the decision log with reason and impact.
 
 <!-- BEGIN DOCUMENT: guides/04-target-architecture.md -->
 
-# 04 — Target architecture and design guidance
+## 04 — Target architecture and design guidance
 
 ## Design objective
 
@@ -794,7 +794,7 @@ Do not migrate Controllers to Minimal APIs (or the reverse) as a side effect of 
 
 <!-- BEGIN DOCUMENT: guides/05-parity-and-testing.md -->
 
-# 05 — Test strategy and end-to-end parity
+## 05 — Test strategy and end-to-end parity
 
 ## Principle
 
@@ -1019,7 +1019,7 @@ A vertical slice is complete only when:
 
 <!-- BEGIN DOCUMENT: guides/06-technical-modernization-decisions.md -->
 
-# 06 — Technical modernization decisions
+## 06 — Technical modernization decisions
 
 ## Starting position
 
@@ -1252,7 +1252,7 @@ Use `dotnet-counters`, `dotnet-trace`, existing APM/OpenTelemetry, load-testing 
 
 <!-- BEGIN DOCUMENT: guides/07-engineering-rules-and-ai-guardrails.md -->
 
-# 07 — Engineering rules and AI guardrails
+## 07 — Engineering rules and AI guardrails
 
 These rules apply to every AI prompt and every implementation plan. Treat them as non-negotiable unless a named human owner approves a documented exception.
 
@@ -1369,7 +1369,7 @@ A plan is done only when its acceptance criteria are evidenced, relevant tests p
 
 <!-- BEGIN DOCUMENT: guides/08-deliverables-and-project-workspace.md -->
 
-# 08 — Deliverables and recommended workspace
+## 08 — Deliverables and recommended workspace
 
 ## Recommended documentation workspace
 
@@ -1494,7 +1494,7 @@ Keep test result files, coverage, logs, parity outputs and performance artifacts
 
 <!-- BEGIN DOCUMENT: guides/09-multi-api-rollout.md -->
 
-# 09 — Applying the playbook across multiple Web APIs
+## 09 — Applying the playbook across multiple Web APIs
 
 ## Recommendation
 
@@ -1580,7 +1580,7 @@ Do not compare APIs solely by lines changed or package count. The strongest outc
 
 <!-- BEGIN DOCUMENT: prompts/00-project-preflight.md -->
 
-# Prompt 00 — Project preflight, scope and Git safety
+## Prompt 00 — Project preflight, scope and Git safety
 
 > Run this first in the repository root. It establishes safe context; it is not permission to rewrite code.
 
@@ -1623,7 +1623,7 @@ Never claim that a branch was created unless the Git command succeeded and you v
 
 <!-- BEGIN DOCUMENT: prompts/01-read-only-assessment.md -->
 
-# Prompt 01 — Read-only architecture, responsibility, contract and test assessment
+## Prompt 01 — Read-only architecture, responsibility, contract and test assessment
 
 > Run after Prompt 00. This prompt must not change application or test source code.
 
@@ -1737,7 +1737,7 @@ Summarize application scope, responsibilities, API contract, dependencies, tests
 
 <!-- BEGIN DOCUMENT: prompts/02-strategy-and-plan.md -->
 
-# Prompt 02 — Architecture strategy decision and implementation planning
+## Prompt 02 — Architecture strategy decision and implementation planning
 
 > Run after the read-only assessment has sufficient evidence. This phase may create or update planning documents but must not modify application source or tests.
 
@@ -1840,7 +1840,7 @@ Provide the selected strategy and why the other options were not selected, targe
 
 <!-- BEGIN DOCUMENT: prompts/03-contract-first-skeleton.md -->
 
-# Prompt 03 — Contract-first skeleton and parity harness
+## Prompt 03 — Contract-first skeleton and parity harness
 
 > Run only after Prompt 02 has been reviewed and the architecture/skeleton plan has been approved.
 
@@ -1916,7 +1916,7 @@ List changed files, implemented skeleton elements, contract-test coverage, exact
 
 <!-- BEGIN DOCUMENT: prompts/04-pilot-and-vertical-slices.md -->
 
-# Prompt 04 — Pilot implementation and sequential vertical slices
+## Prompt 04 — Pilot implementation and sequential vertical slices
 
 > Run after the skeleton/parity harness gate passes. Use the same prompt for the pilot and each subsequent capability, updating the plan ID and slice scope.
 
@@ -2024,7 +2024,7 @@ Report plan ID, slice, files changed, behaviour preserved, new behaviour impleme
 
 <!-- BEGIN DOCUMENT: prompts/05-dependency-modernization.md -->
 
-# Prompt 05 — Safe dependency and pattern modernization
+## Prompt 05 — Safe dependency and pattern modernization
 
 > Run one technology workstream at a time. Replace `<WORKSTREAM>` with MediatR, FluentValidation, FluentAssertions or direct Polly integration. Do not combine multiple package removals into one opaque change.
 
@@ -2111,7 +2111,7 @@ Provide a before/after dependency usage table, files changed, behaviours moved/p
 
 <!-- BEGIN DOCUMENT: prompts/06-final-validation-and-dev-readiness.md -->
 
-# Prompt 06 — Full regression, parity and DEV deployment readiness
+## Prompt 06 — Full regression, parity and DEV deployment readiness
 
 > Run after every approved slice/workstream is complete. This prompt prepares readiness evidence; it does not authorize deployment.
 
@@ -2227,7 +2227,7 @@ Give an evidence-based GO / CONDITIONAL GO / NO-GO recommendation for DEV. A GO 
 
 <!-- BEGIN DOCUMENT: prompts/07-independent-review.md -->
 
-# Prompt 07 — Independent adversarial architecture and parity review
+## Prompt 07 — Independent adversarial architecture and parity review
 
 > Run as a separate review pass. Ideally use a fresh agent/session that did not implement the changes.
 
@@ -2308,7 +2308,7 @@ Do not fix issues during this pass. First report findings. Do not declare GO if 
 
 <!-- BEGIN DOCUMENT: templates/plan-template.md -->
 
-# PLAN-XXX — <Plan title>
+## PLAN-XXX — <Plan title>
 
 ## Status
 
@@ -2425,7 +2425,7 @@ Record material deviations and approvals.
 
 <!-- BEGIN DOCUMENT: templates/responsibility-and-parity-matrix-template.md -->
 
-# Responsibility and parity matrix
+## Responsibility and parity matrix
 
 ## A. Responsibility inventory
 
@@ -2468,13 +2468,13 @@ Difference classification must be one of:
 
 <!-- BEGIN DOCUMENT: templates/risk-and-decision-log-template.md -->
 
-# Risks and unknowns register
+## Risks and unknowns register
 
 | ID | Type (risk/unknown/assumption) | Description | Affected responsibility/plan | Impact | Likelihood/confidence | Mitigation / investigation | Owner | Due/gate | Status |
 |---|---|---|---|---|---|---|---|---|---|
 | RISK-001 | | | | | | | | | |
 
-# Architecture / implementation decision log
+## Architecture / implementation decision log
 
 ## DEC-XXX — <Decision title>
 
@@ -2517,7 +2517,7 @@ Link source files, tests, measurements and relevant documentation.
 
 <!-- BEGIN DOCUMENT: templates/progress-tracker-template.md -->
 
-# Modernization progress tracker
+## Modernization progress tracker
 
 ## Project summary
 

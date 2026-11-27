@@ -106,6 +106,7 @@ Run the complete matrix and prepare an evidence-backed deployment pack. Deployme
 ## How to reorder plans safely
 
 A plan may move earlier only when:
+
 - Its prerequisites are satisfied.
 - Its scope is independent or dependencies are explicitly handled.
 - Baseline and regression tests protect the affected behaviour.
@@ -113,6 +114,7 @@ A plan may move earlier only when:
 - The new order does not create unsafe coexistence or data changes.
 
 A plan may move later when:
+
 - Its expected benefit is low relative to risk.
 - A prerequisite has not been validated.
 - Current code does not use the package/pattern.

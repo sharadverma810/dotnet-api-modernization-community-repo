@@ -15,6 +15,7 @@ Prefer explicit application services/use-case classes invoked directly through c
 ### Inventory before removal
 
 Inspect every usage of:
+
 - `IRequest<T>`, `IRequest`, `IRequestHandler<,>` and `IRequestHandler<>`.
 - `INotification`, notification handlers and publishers.
 - Pipeline behaviours.
@@ -25,6 +26,7 @@ Inspect every usage of:
 - Cancellation token propagation.
 
 For every behaviour, identify its actual responsibility and move it to the right boundary:
+
 - Validation → API boundary or application use case, depending on rule type.
 - Transaction management → use-case/persistence transaction boundary.
 - Authorization → endpoint policy and/or application/domain enforcement as appropriate.
@@ -95,6 +97,7 @@ Keep the work packages separately testable. First extract and test validation be
 ### Recommendation
 
 Prefer the project's existing test framework assertions:
+
 - xUnit: `Assert` APIs.
 - NUnit: `Assert` / constraint model.
 - MSTest: `Assert` and `CollectionAssert` APIs.
@@ -124,6 +127,7 @@ Replace direct Polly usage in application code with Microsoft's `Microsoft.Exten
 ### Inventory current semantics
 
 For each outbound dependency, record:
+
 - Which operations are retried and which are not.
 - Retry count, delay, exponential backoff, jitter and max delay.
 - Which status codes/exceptions trigger a retry.
@@ -150,6 +154,7 @@ For each outbound dependency, record:
 Use the capabilities available in the actual .NET 10 SDK/C# 14 compiler, but adopt changes selectively. Keep `TargetFramework` at `net10.0` throughout this initiative.
 
 Candidates to evaluate:
+
 - C# 14 syntax/features where they improve clarity or remove boilerplate.
 - `System.Text.Json` source generation for measured serialization hot paths or trimming/AOT constraints.
 - Efficient async patterns and cancellation propagation.
@@ -175,6 +180,7 @@ Candidates to evaluate:
 ### Performance method
 
 For representative endpoints, compare the same workload and environment. Capture:
+
 - Throughput (requests/second).
 - p50, p95 and p99 latency.
 - CPU consumption.

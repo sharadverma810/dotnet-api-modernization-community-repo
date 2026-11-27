@@ -62,22 +62,49 @@ Each plan must contain:
 2. Business/technical rationale.
 3. Existing behaviour and responsibilities to preserve.
 4. Goal and measurable expected outcome.
-5. Scope and non-goals.
-6. Affected projects/files/components.
-7. Prerequisites/dependencies.
-8. Proposed design and implementation steps.
-9. API/data/security/resilience implications.
-10. Unit/component/integration/contract/acceptance/parity tests.
-11. Performance validation when relevant.
-12. Acceptance criteria and definition of done.
-13. Risks, mitigations and rollback.
-14. Validation commands and evidence expected.
+5. Explicit Clean Architecture and vertical-slice alignment: feature boundary, use case, domain rules, application orchestration, infrastructure adapters, dependency direction and complete-slice boundary.
+6. Explicit AI-native delivery approach: repository evidence, deterministic context, permitted automation, human approvals, traceability and safeguards against fake or incomplete production behavior.
+7. Scope and non-goals.
+8. Affected projects/files/components.
+9. Prerequisites/dependencies and dependency-aware sequencing.
+10. Proposed design and independently executable implementation steps.
+11. API/data/security/resilience implications.
+12. Unit/component/integration/contract/acceptance/parity tests.
+13. Concrete parity validation for contract, business outcomes, data/transactions, side effects, failures, authorization and performance where relevant.
+14. Measurable success criteria, acceptance criteria and definition of done.
+15. Risks, owners, mitigations, rollback triggers and rollback/recovery path.
+16. Validation commands and evidence expected.
+
+Plans must be concrete rather than a list of themes: identify the capability or concern being changed, the responsibilities it preserves, the files/components likely affected, prerequisites, ordered implementation steps, outputs, and evidence needed for approval. Create separate plans for each applicable workstream below; do not merge independent package migrations into one opaque plan:
+
+- Test/parity harness and risk-based test gap closure.
+- Minimal target architecture/skeleton, if justified.
+- Representative pilot vertical slice.
+- Remaining business capability vertical slices in dependency order.
+- FluentAssertions replacement or documented retention decision.
+- MediatR behavior extraction and direct use-case invocation.
+- FluentValidation replacement or deliberate retention decision.
+- Direct Polly usage migration to Microsoft.Extensions resilience integration where appropriate.
+- Measured performance and memory optimization.
+- Package/dead-code cleanup and final verification.
+
+PLAN QUALITY CHECKS
+- Reject a plan that does not name the responsibilities, endpoints/triggers, files or components it affects or preserves.
+- Reject a plan with no explicit prerequisites, dependency order, implementation outputs or independently verifiable steps.
+- Reject a plan whose success criteria are subjective or lack commands, measurements, fixtures or other evidence.
+- Reject a plan that describes layers without mapping a real feature through a complete vertical slice and stating dependency direction.
+- Reject a plan that treats AI generation as a substitute for repository inspection, human approval or test evidence.
+- Reject a plan that uses production fakes, placeholder success responses or unbounded autonomous changes.
+- Reject a parity plan that compares only status codes or JSON shape; require business outcomes, data/transactions, side effects and failure/security behavior where applicable.
+- Reject a risk section without named owners, rollback triggers and a recovery path for code, configuration, data, schema, messages and external side effects as applicable.
+- Reject a plan without focused validation commands, expected evidence and a definition of done.
 
 PART 6 — Prioritize and sequence
 Build a dependency-aware order. Prioritize prerequisites before refactors. Explain which plans may run in parallel and which must be sequential. A single API modernization should not become a multi-project big-bang change. State how shared libraries will be handled.
 
 PART 7 — Approval gates
 Identify decisions that require human approval, including API/business contract changes, schema/data migration, auth changes, new host/deployment topology, message contract changes, materially different retry/timeout semantics and DEV deployment.
+Do not create project-specific implementation details without repository evidence. Keep independent dependency migrations in separate plans. Treat the following as approval blockers rather than AI-autonomous decisions: contract or business behavior changes, schema/data changes, authorization changes, new hosting topology, message changes, materially different resilience semantics and deployment.
 
 DELIVERABLES
 Create/update:

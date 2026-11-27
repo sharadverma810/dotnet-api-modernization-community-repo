@@ -1,6 +1,7 @@
 # Modernization progress tracker
 
 ## Project summary
+
 - API/project:
 - Repository:
 - Feature branch:
@@ -23,6 +24,7 @@
 | | | | | | | | | | |
 
 ## Validation summary
+
 - Last restore/build:
 - Last complete test run:
 - Pre-existing failures:
@@ -32,9 +34,11 @@
 - Latest performance report:
 
 ## Current risks and decisions
+
 - Open blockers:
 - Approvals required:
 - Residual risks:
 
 ## Next action
+
 Describe the single next approved action and the gate it satisfies.

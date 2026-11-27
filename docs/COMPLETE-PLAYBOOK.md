@@ -2,9 +2,9 @@
 
 > This file consolidates the complete reusable playbook. The companion ZIP contains the same content split into individual documents for easier use.
 
+<!-- markdownlint-disable MD025 -->
+
 ---
-
-
 
 <!-- BEGIN DOCUMENT: README.md -->
 
@@ -89,11 +89,9 @@ The technical guidance in this playbook is informed by these Microsoft reference
 
 **Operating principle:** Modernize the implementation, not the externally relied-upon responsibilities. Every change must be traceable to an approved plan, protected by tests, and supported by execution evidence.
 
-
 <!-- END DOCUMENT: README.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/01-recommended-strategy.md -->
 
@@ -290,11 +288,9 @@ Implement the pilot completely and review whether the architecture, testing appr
 
 The new implementation is successful when the required capabilities and externally relied-upon contracts are preserved, all meaningful side effects are correct, security and reliability remain sound, the full validation suite passes, and any performance/maintainability improvements are evidenced. Source-code similarity to the old API is not a success criterion.
 
-
 <!-- END DOCUMENT: guides/01-recommended-strategy.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/02-stages-and-gates.md -->
 
@@ -307,6 +303,7 @@ This lifecycle is intended to be repeatable for each API. The AI agent must not 
 **Goal:** Establish a safe, isolated work area and define what is in scope.
 
 Activities:
+
 - Identify repository, solution, API project(s), shared libraries and runtime entry point.
 - Confirm the project already targets `net10.0`; do not change target framework or turn this work into a .NET 11 upgrade.
 - Check SDK, `global.json`, CI SDK configuration and deployment runtime compatibility.
@@ -325,6 +322,7 @@ Deliverables: scope note, branch name, baseline commit, repository status and kn
 **Goal:** Understand the API as it operates today, not as documentation says it should operate.
 
 Inspect:
+
 - Routes, controllers/Minimal APIs, API versions, DTOs and OpenAPI.
 - Request/response mappings, status codes, headers, errors and serialization options.
 - Authentication, authorization, claims, scopes and policies.
@@ -350,6 +348,7 @@ Deliverables: architecture assessment, responsibility catalogue, API contract in
 **Goal:** Create reproducible evidence of current behaviour and system health.
 
 Activities:
+
 - Run restore/build and all currently configured tests on the baseline.
 - Record pass/fail/skipped counts, durations, warnings and known pre-existing failures.
 - Identify which test categories actually run in the pipeline; do not assume one `dotnet test` command covers everything.
@@ -370,6 +369,7 @@ Deliverables: test baseline, coverage gap analysis, contract fixtures, behaviour
 **Goal:** Decide in-place, hybrid or new host/project based on repository evidence.
 
 Activities:
+
 - Compare the three options using complexity, contract risk, coupling, host quality, testability, operational cost and rollback.
 - Default to hybrid: preserve outward API/deployment boundary, improve internals.
 - Define desired dependency direction and feature/use-case structure.
@@ -387,6 +387,7 @@ Deliverables: architecture decision record (ADR), target architecture, migration
 **Goal:** Establish the target boundary and prove tests can exercise both old and new paths.
 
 Activities:
+
 - Build the smallest target skeleton justified by Stage 3.
 - Preserve route/method/version, request/response DTO shape, error model and auth policy.
 - Configure test host and fake outbound adapters only in the test composition.
@@ -406,6 +407,7 @@ Deliverables: target skeleton, contract tests, test composition, fake adapters, 
 **Goal:** Validate the proposed architecture with one complete, representative use case.
 
 Activities:
+
 - Select pilot from the dependency-aware capability map.
 - Implement actual application logic, persistence and required integrations.
 - Keep DTO/API boundary stable.
@@ -423,6 +425,7 @@ Deliverables: production-capable pilot slice, test evidence, parity report, perf
 **Goal:** Migrate remaining capabilities in the approved dependency order.
 
 For each slice:
+
 1. Read its plan and responsibility/contract evidence.
 2. Confirm prerequisites and test fixtures.
 3. Implement only the slice and essential shared infrastructure.
@@ -445,6 +448,7 @@ Deliverables: completed slices, traceability matrix, updated parity matrix and r
 **Goal:** Remove direct dependencies and obsolete patterns after replacement behaviour is proven.
 
 Potential workstreams:
+
 - MediatR extraction/removal.
 - FluentValidation replacement/retention decision.
 - FluentAssertions replacement.
@@ -465,6 +469,7 @@ Deliverables: package inventory diff, code-reference scan, dependency graph revi
 Run all applicable tests and checks: build, unit, component, integration, contract, acceptance, end-to-end, parity, authorization/security, concurrency/idempotency, resilience/fault, migration/data compatibility and performance.
 
 Review:
+
 - DEV configuration and secret references.
 - Database/schema migration order and backward compatibility.
 - Messaging compatibility and consumer/producer rollout order.
@@ -483,6 +488,7 @@ Deliverables: final verification report, test evidence, parity report, performan
 **Goal:** Validate the candidate in the target DEV environment before QA proceeds.
 
 Activities:
+
 - Deploy only with explicit authorization.
 - Verify startup, health, configuration, auth, connectivity and telemetry.
 - Run DEV smoke tests and safe integration scenarios.
@@ -494,11 +500,9 @@ Do not call a DEV deployment proof of production safety. DEV is an additional va
 
 **Gate 9:** QA and technical owners accept the DEV results or document remaining issues and next action.
 
-
 <!-- END DOCUMENT: guides/02-stages-and-gates.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/03-implementation-order.md -->
 
@@ -610,6 +614,7 @@ Run the complete matrix and prepare an evidence-backed deployment pack. Deployme
 ## How to reorder plans safely
 
 A plan may move earlier only when:
+
 - Its prerequisites are satisfied.
 - Its scope is independent or dependencies are explicitly handled.
 - Baseline and regression tests protect the affected behaviour.
@@ -617,6 +622,7 @@ A plan may move earlier only when:
 - The new order does not create unsafe coexistence or data changes.
 
 A plan may move later when:
+
 - Its expected benefit is low relative to risk.
 - A prerequisite has not been validated.
 - Current code does not use the package/pattern.
@@ -624,11 +630,9 @@ A plan may move later when:
 
 Every reordering must be recorded in the decision log with reason and impact.
 
-
 <!-- END DOCUMENT: guides/03-implementation-order.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/04-target-architecture.md -->
 
@@ -729,6 +733,7 @@ Do not preserve a MediatR pipeline merely by copying it into a new generic pipel
 ## API contract preservation
 
 Capture and preserve:
+
 - Route templates, HTTP verbs and API versions.
 - Request/response schema, required/optional fields and null semantics.
 - Enum representation, casing, date/time formats, numeric precision and serialization settings.
@@ -770,6 +775,7 @@ Do not assume semantically similar JSON is compatible. Check clients and generat
 ## Observability
 
 Retain or improve:
+
 - Structured logs with stable event names and relevant identifiers.
 - Distributed trace propagation across HTTP, database and messaging boundaries.
 - Metrics for request rate, duration, errors and dependency health.
@@ -782,11 +788,9 @@ Avoid logging tokens, credentials, sensitive payloads or unnecessarily identifia
 
 Do not migrate Controllers to Minimal APIs (or the reverse) as a side effect of removing MediatR. Keep the existing style unless a specific plan proves a benefit. API style is not the objective; correct contracts and maintainable implementation are.
 
-
 <!-- END DOCUMENT: guides/04-target-architecture.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/05-parity-and-testing.md -->
 
@@ -821,6 +825,7 @@ Not every endpoint requires a separate test project for every category. Organize
 ## Baseline before change
 
 Record:
+
 - Commit/hash tested and SDK/runtime used.
 - Restore/build results.
 - Test suites and exact commands executed.
@@ -871,6 +876,7 @@ A parity result must specify which outputs are compared and which are intentiona
 ## Parity harness design
 
 Prefer one shared scenario definition that can run against both implementations. Depending on architecture, the harness may use:
+
 - Two `HttpClient` instances pointed at isolated old/new test hosts.
 - A shared test suite parameterized by the implementation under test.
 - Recorded baseline fixtures for deterministic read-only behaviour.
@@ -896,11 +902,13 @@ The right option depends on the API and available environment. Do not force a ne
 ## Deterministic comparison
 
 Normalize only fields that are genuinely nondeterministic and do not represent business behaviour, for example:
+
 - Generated correlation/request identifiers.
 - Timestamps only when generated at runtime and not part of the business rule under test.
 - Randomized provider IDs only when the ID's value is not contractually meaningful.
 
 Never normalize away:
+
 - Monetary values/rounding.
 - Date/time zone conversions.
 - Ordering when ordering is part of the contract.
@@ -917,6 +925,7 @@ For timestamps, use fixed clocks or controlled inputs where possible rather than
 Generate tests from the discovered API and business rules. Common categories include:
 
 ### Request and validation
+
 - Missing body, malformed JSON and unsupported content type.
 - Missing/null/empty fields.
 - Boundary numeric values and string lengths.
@@ -927,6 +936,7 @@ Generate tests from the discovered API and business rules. Common categories inc
 - Asynchronous/database-dependent validation.
 
 ### Business behaviour
+
 - State transition allowed and disallowed.
 - Missing entity, soft-deleted entity and inaccessible entity.
 - Duplicate create/update.
@@ -937,12 +947,14 @@ Generate tests from the discovered API and business rules. Common categories inc
 - Pagination first/last/empty/invalid continuation token.
 
 ### Security
+
 - Anonymous, wrong identity, missing role/scope/claim.
 - Cross-tenant/resource access.
 - Token expiry and invalid audience/issuer where testable.
 - Privilege escalation and indirect object reference.
 
 ### Dependency and reliability
+
 - Timeout, connection refused, 429 and 5xx.
 - Malformed/unexpected downstream payload.
 - Retry exhaustion and circuit open/half-open.
@@ -952,6 +964,7 @@ Generate tests from the discovered API and business rules. Common categories inc
 - Partial failure after one side effect but before another.
 
 ### Operational
+
 - Configuration absent/invalid.
 - Startup failure and readiness/liveness.
 - Telemetry and correlation propagation.
@@ -960,6 +973,7 @@ Generate tests from the discovered API and business rules. Common categories inc
 ## Test gap prioritization
 
 Score each gap using:
+
 - Business criticality (1–5).
 - Exposure/probability (1–5).
 - Failure impact (1–5).
@@ -987,6 +1001,7 @@ Use the existing database emulator, local infrastructure or approved Testcontain
 ## Slice-level definition of done
 
 A vertical slice is complete only when:
+
 - Public contract remains approved and compatible.
 - Actual production adapters are used for the capability.
 - Business logic and persistence are implemented.
@@ -998,11 +1013,9 @@ A vertical slice is complete only when:
 - Logs/traces/metrics remain fit for operations.
 - Plan, traceability and risk records are updated.
 
-
 <!-- END DOCUMENT: guides/05-parity-and-testing.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/06-technical-modernization-decisions.md -->
 
@@ -1023,6 +1036,7 @@ Prefer explicit application services/use-case classes invoked directly through c
 ### Inventory before removal
 
 Inspect every usage of:
+
 - `IRequest<T>`, `IRequest`, `IRequestHandler<,>` and `IRequestHandler<>`.
 - `INotification`, notification handlers and publishers.
 - Pipeline behaviours.
@@ -1033,6 +1047,7 @@ Inspect every usage of:
 - Cancellation token propagation.
 
 For every behaviour, identify its actual responsibility and move it to the right boundary:
+
 - Validation → API boundary or application use case, depending on rule type.
 - Transaction management → use-case/persistence transaction boundary.
 - Authorization → endpoint policy and/or application/domain enforcement as appropriate.
@@ -1103,6 +1118,7 @@ Keep the work packages separately testable. First extract and test validation be
 ### Recommendation
 
 Prefer the project's existing test framework assertions:
+
 - xUnit: `Assert` APIs.
 - NUnit: `Assert` / constraint model.
 - MSTest: `Assert` and `CollectionAssert` APIs.
@@ -1132,6 +1148,7 @@ Replace direct Polly usage in application code with Microsoft's `Microsoft.Exten
 ### Inventory current semantics
 
 For each outbound dependency, record:
+
 - Which operations are retried and which are not.
 - Retry count, delay, exponential backoff, jitter and max delay.
 - Which status codes/exceptions trigger a retry.
@@ -1158,6 +1175,7 @@ For each outbound dependency, record:
 Use the capabilities available in the actual .NET 10 SDK/C# 14 compiler, but adopt changes selectively. Keep `TargetFramework` at `net10.0` throughout this initiative.
 
 Candidates to evaluate:
+
 - C# 14 syntax/features where they improve clarity or remove boilerplate.
 - `System.Text.Json` source generation for measured serialization hot paths or trimming/AOT constraints.
 - Efficient async patterns and cancellation propagation.
@@ -1183,6 +1201,7 @@ Candidates to evaluate:
 ### Performance method
 
 For representative endpoints, compare the same workload and environment. Capture:
+
 - Throughput (requests/second).
 - p50, p95 and p99 latency.
 - CPU consumption.
@@ -1227,11 +1246,9 @@ Use `dotnet-counters`, `dotnet-trace`, existing APM/OpenTelemetry, load-testing 
 - [`dotnet-counters`](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-counters)
 - [`dotnet-trace`](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace)
 
-
 <!-- END DOCUMENT: guides/06-technical-modernization-decisions.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/07-engineering-rules-and-ai-guardrails.md -->
 
@@ -1346,11 +1363,9 @@ These rules apply to every AI prompt and every implementation plan. Treat them a
 
 A plan is done only when its acceptance criteria are evidenced, relevant tests pass, behavioural differences are understood and approved, documentation is updated, and the reviewer can reproduce the validation. “Code compiled” is not a definition of done.
 
-
 <!-- END DOCUMENT: guides/07-engineering-rules-and-ai-guardrails.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/08-deliverables-and-project-workspace.md -->
 
@@ -1457,6 +1472,7 @@ This prevents endpoints or non-HTTP work (for example hosted services and messag
 ## What to put in every plan
 
 Use `templates/plan-template.md`. At minimum it must specify:
+
 - Goal and business rationale.
 - Existing responsibility and behaviour to preserve.
 - Scope and non-goals.
@@ -1472,11 +1488,9 @@ Use `templates/plan-template.md`. At minimum it must specify:
 
 Keep test result files, coverage, logs, parity outputs and performance artifacts in the repository's approved artifact location. Do not commit large or sensitive outputs by default. Link to CI artifacts or sanitized reports. Never commit secrets, raw production data or sensitive customer payloads.
 
-
 <!-- END DOCUMENT: guides/08-deliverables-and-project-workspace.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: guides/09-multi-api-rollout.md -->
 
@@ -1510,6 +1524,7 @@ Before selecting the first API, create a portfolio register:
 Do not automatically choose the smallest API or the most complex API.
 
 Choose a pilot API that is:
+
 - Representative of the architecture patterns used by other APIs.
 - Important enough to validate the playbook against real engineering constraints.
 - Bounded enough that the team can complete assessment and one or two full slices.
@@ -1531,6 +1546,7 @@ A good pilot helps identify reusable standards (for example parity harness conve
 ## Shared libraries
 
 A shared library can affect many services. Before changing it:
+
 - List all consumers and versions.
 - Determine which APIs deploy together and which deploy independently.
 - Preserve binary/source compatibility where required.
@@ -1545,6 +1561,7 @@ Do not introduce a new shared framework for application patterns solely to make 
 ## Portfolio metrics
 
 Track outcomes across APIs:
+
 - Number of responsibilities mapped and migrated.
 - Number of API/functional parity scenarios passed.
 - New regression defects and escaped defects.
@@ -1557,11 +1574,9 @@ Track outcomes across APIs:
 
 Do not compare APIs solely by lines changed or package count. The strongest outcome is reduced operational and change risk with preserved business behaviour.
 
-
 <!-- END DOCUMENT: guides/09-multi-api-rollout.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/00-project-preflight.md -->
 
@@ -1602,11 +1617,9 @@ Report:
 Never claim that a branch was created unless the Git command succeeded and you verified the current branch afterward.
 ```
 
-
 <!-- END DOCUMENT: prompts/00-project-preflight.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/01-read-only-assessment.md -->
 
@@ -1718,11 +1731,9 @@ FINAL RESPONSE
 Summarize application scope, responsibilities, API contract, dependencies, tests, known failures, critical gaps, performance evidence and unknowns. Do not propose a final architecture yet; that is the next phase. Confirm that no source/test/package/configuration files were changed.
 ```
 
-
 <!-- END DOCUMENT: prompts/01-read-only-assessment.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/02-strategy-and-plan.md -->
 
@@ -1823,11 +1834,9 @@ FINAL RESPONSE
 Provide the selected strategy and why the other options were not selected, target architecture, plan summary, sequence, risks, required approvals and measurable gates. Explicitly state whether a separate API host/project is recommended. Do not implement application code or modify tests in this phase.
 ```
 
-
 <!-- END DOCUMENT: prompts/02-strategy-and-plan.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/03-contract-first-skeleton.md -->
 
@@ -1901,11 +1910,9 @@ FINAL RESPONSE
 List changed files, implemented skeleton elements, contract-test coverage, exact test results, known gaps, fake adapter safeguards, deviations and whether the skeleton gate passed. Do not claim functional parity.
 ```
 
-
 <!-- END DOCUMENT: prompts/03-contract-first-skeleton.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/04-pilot-and-vertical-slices.md -->
 
@@ -2011,11 +2018,9 @@ FINAL RESPONSE
 Report plan ID, slice, files changed, behaviour preserved, new behaviour implemented, tests and exact commands/results, parity comparison, performance evidence, risks, documentation updates and COMPLETE/BLOCKED/FAILED status. Do not begin the next slice unless the current slice's gate is passed.
 ```
 
-
 <!-- END DOCUMENT: prompts/04-pilot-and-vertical-slices.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/05-dependency-modernization.md -->
 
@@ -2100,11 +2105,9 @@ FINAL RESPONSE
 Provide a before/after dependency usage table, files changed, behaviours moved/preserved, tests and exact commands/results, dependency graph findings, risks and plan status. Do not start another dependency workstream automatically.
 ```
 
-
 <!-- END DOCUMENT: prompts/05-dependency-modernization.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/06-final-validation-and-dev-readiness.md -->
 
@@ -2218,11 +2221,9 @@ FINAL RESPONSE
 Give an evidence-based GO / CONDITIONAL GO / NO-GO recommendation for DEV. A GO means readiness criteria have been met for DEV deployment and QA testing; it does not mean production release is approved or guaranteed safe. List every unmet criterion and every unexecuted test.
 ```
 
-
 <!-- END DOCUMENT: prompts/06-final-validation-and-dev-readiness.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: prompts/07-independent-review.md -->
 
@@ -2301,62 +2302,73 @@ Create `reports/independent-review.md` containing:
 Do not fix issues during this pass. First report findings. Do not declare GO if there is any unresolved blocker or unexplained parity difference.
 ```
 
-
 <!-- END DOCUMENT: prompts/07-independent-review.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: templates/plan-template.md -->
 
 # PLAN-XXX — <Plan title>
 
 ## Status
+
 NOT_STARTED | ASSESSMENT_COMPLETE | APPROVED | IN_PROGRESS | BLOCKED | IMPLEMENTED_AWAITING_VALIDATION | VALIDATION_FAILED | PARITY_FAILED | COMPLETE | DEFERRED | REJECTED
 
 ## Priority and owner
+
 - Priority: P0 / P1 / P2 / P3
 - Owner/reviewer:
 - Target API/project:
 - Related decision/ADR:
 
 ## 1. Goal
+
 What measurable outcome should this plan achieve?
 
 ## 2. Business and technical rationale
+
 Why is the change needed? What risk, cost or limitation does it address?
 
 ## 3. Existing responsibilities and behaviour to preserve
+
 List the responsibility IDs, endpoints/triggers, business rules, public contracts, data behaviour, auth and side effects.
 
 ## 4. Current state and evidence
+
 - Relevant project/files/types/methods:
 - Existing tests:
 - Baseline results:
 - Known limitations:
 
 ## 5. Scope
+
 ### In scope
+
 -
 
 ### Out of scope
+
 -
 
 ## 6. Dependencies and prerequisites
+
 - Upstream plans:
 - Downstream plans:
 - Required infrastructure/test data:
 - Required approvals:
 
 ## 7. Target design
+
 Describe the intended implementation, dependency direction and why it is simpler/safer.
 
 ## 8. Implementation steps
+
 1.
 2.
 3.
 
 ## 9. Impact assessment
+
 - API contract:
 - Business behaviour:
 - Data/schema/transactions:
@@ -2369,6 +2381,7 @@ Describe the intended implementation, dependency direction and why it is simpler
 - CI/CD/deployment:
 
 ## 10. Test and parity plan
+
 - Unit/component:
 - Integration:
 - Contract:
@@ -2379,32 +2392,36 @@ Describe the intended implementation, dependency direction and why it is simpler
 - Performance validation:
 
 ## 11. Acceptance criteria
+
 - [ ]
 - [ ]
 - [ ]
 
 ## 12. Risks and mitigations
+
 | Risk | Impact | Likelihood | Mitigation | Owner |
 |---|---|---|---|---|
 
 ## 13. Rollback
+
 What is the safe rollback path? Consider code, data, schema, messages and configuration.
 
 ## 14. Validation commands and evidence
+
 | Command/suite | Environment | Expected evidence | Actual result |
 |---|---|---|---|
 
 ## 15. Definition of done
+
 State objective conditions required before status can become COMPLETE.
 
 ## 16. Implementation notes and decision history
-Record material deviations and approvals.
 
+Record material deviations and approvals.
 
 <!-- END DOCUMENT: templates/plan-template.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: templates/responsibility-and-parity-matrix-template.md -->
 
@@ -2429,6 +2446,7 @@ Record material deviations and approvals.
 | PAR-001 | | | | | | | | | | | | |
 
 Difference classification must be one of:
+
 - MATCH
 - REGRESSION
 - APPROVED_CHANGE
@@ -2444,11 +2462,9 @@ Difference classification must be one of:
 |---|---|---|---|---|---|---|---|---|---|---|
 | RESP-001 | | | | | | | | | | |
 
-
 <!-- END DOCUMENT: templates/responsibility-and-parity-matrix-template.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: templates/risk-and-decision-log-template.md -->
 
@@ -2461,44 +2477,50 @@ Difference classification must be one of:
 # Architecture / implementation decision log
 
 ## DEC-XXX — <Decision title>
+
 - Date:
 - Status: PROPOSED / APPROVED / REJECTED / SUPERSEDED
 - Decision owner/approver:
 - Related plan(s):
 
 ### Context
+
 What problem and constraints triggered the decision?
 
 ### Options considered
+
 1. Option A — benefits, drawbacks, risks.
 2. Option B — benefits, drawbacks, risks.
 3. Option C — benefits, drawbacks, risks.
 
 ### Decision
+
 What was selected?
 
 ### Rationale
+
 Why is this the best fit for this API and current evidence?
 
 ### Consequences
+
 - Positive:
 - Negative/trade-offs:
 - Follow-up work:
 
 ### Evidence and references
-Link source files, tests, measurements and relevant documentation.
 
+Link source files, tests, measurements and relevant documentation.
 
 <!-- END DOCUMENT: templates/risk-and-decision-log-template.md -->
 
 ---
-
 
 <!-- BEGIN DOCUMENT: templates/progress-tracker-template.md -->
 
 # Modernization progress tracker
 
 ## Project summary
+
 - API/project:
 - Repository:
 - Feature branch:
@@ -2521,6 +2543,7 @@ Link source files, tests, measurements and relevant documentation.
 | | | | | | | | | | |
 
 ## Validation summary
+
 - Last restore/build:
 - Last complete test run:
 - Pre-existing failures:
@@ -2530,13 +2553,14 @@ Link source files, tests, measurements and relevant documentation.
 - Latest performance report:
 
 ## Current risks and decisions
+
 - Open blockers:
 - Approvals required:
 - Residual risks:
 
 ## Next action
-Describe the single next approved action and the gate it satisfies.
 
+Describe the single next approved action and the gate it satisfies.
 
 <!-- END DOCUMENT: templates/progress-tracker-template.md -->
 

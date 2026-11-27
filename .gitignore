@@ -1,0 +1,27 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# .NET build output
+**/bin/
+**/obj/
+**/TestResults/
+*.user
+*.suo
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+secrets.json
+*.pfx
+*.p12
+*.key
+
+# Generated artifacts
+*.zip
+*.log

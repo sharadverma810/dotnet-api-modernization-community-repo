@@ -29,6 +29,7 @@ Not every endpoint requires a separate test project for every category. Organize
 ## Baseline before change
 
 Record:
+
 - Commit/hash tested and SDK/runtime used.
 - Restore/build results.
 - Test suites and exact commands executed.
@@ -79,6 +80,7 @@ A parity result must specify which outputs are compared and which are intentiona
 ## Parity harness design
 
 Prefer one shared scenario definition that can run against both implementations. Depending on architecture, the harness may use:
+
 - Two `HttpClient` instances pointed at isolated old/new test hosts.
 - A shared test suite parameterized by the implementation under test.
 - Recorded baseline fixtures for deterministic read-only behaviour.
@@ -104,11 +106,13 @@ The right option depends on the API and available environment. Do not force a ne
 ## Deterministic comparison
 
 Normalize only fields that are genuinely nondeterministic and do not represent business behaviour, for example:
+
 - Generated correlation/request identifiers.
 - Timestamps only when generated at runtime and not part of the business rule under test.
 - Randomized provider IDs only when the ID's value is not contractually meaningful.
 
 Never normalize away:
+
 - Monetary values/rounding.
 - Date/time zone conversions.
 - Ordering when ordering is part of the contract.
@@ -125,6 +129,7 @@ For timestamps, use fixed clocks or controlled inputs where possible rather than
 Generate tests from the discovered API and business rules. Common categories include:
 
 ### Request and validation
+
 - Missing body, malformed JSON and unsupported content type.
 - Missing/null/empty fields.
 - Boundary numeric values and string lengths.
@@ -135,6 +140,7 @@ Generate tests from the discovered API and business rules. Common categories inc
 - Asynchronous/database-dependent validation.
 
 ### Business behaviour
+
 - State transition allowed and disallowed.
 - Missing entity, soft-deleted entity and inaccessible entity.
 - Duplicate create/update.
@@ -145,12 +151,14 @@ Generate tests from the discovered API and business rules. Common categories inc
 - Pagination first/last/empty/invalid continuation token.
 
 ### Security
+
 - Anonymous, wrong identity, missing role/scope/claim.
 - Cross-tenant/resource access.
 - Token expiry and invalid audience/issuer where testable.
 - Privilege escalation and indirect object reference.
 
 ### Dependency and reliability
+
 - Timeout, connection refused, 429 and 5xx.
 - Malformed/unexpected downstream payload.
 - Retry exhaustion and circuit open/half-open.
@@ -160,6 +168,7 @@ Generate tests from the discovered API and business rules. Common categories inc
 - Partial failure after one side effect but before another.
 
 ### Operational
+
 - Configuration absent/invalid.
 - Startup failure and readiness/liveness.
 - Telemetry and correlation propagation.
@@ -168,6 +177,7 @@ Generate tests from the discovered API and business rules. Common categories inc
 ## Test gap prioritization
 
 Score each gap using:
+
 - Business criticality (1–5).
 - Exposure/probability (1–5).
 - Failure impact (1–5).
@@ -195,6 +205,7 @@ Use the existing database emulator, local infrastructure or approved Testcontain
 ## Slice-level definition of done
 
 A vertical slice is complete only when:
+
 - Public contract remains approved and compatible.
 - Actual production adapters are used for the capability.
 - Business logic and persistence are implemented.

@@ -28,6 +28,7 @@ Before selecting the first API, create a portfolio register:
 Do not automatically choose the smallest API or the most complex API.
 
 Choose a pilot API that is:
+
 - Representative of the architecture patterns used by other APIs.
 - Important enough to validate the playbook against real engineering constraints.
 - Bounded enough that the team can complete assessment and one or two full slices.
@@ -49,6 +50,7 @@ A good pilot helps identify reusable standards (for example parity harness conve
 ## Shared libraries
 
 A shared library can affect many services. Before changing it:
+
 - List all consumers and versions.
 - Determine which APIs deploy together and which deploy independently.
 - Preserve binary/source compatibility where required.
@@ -63,6 +65,7 @@ Do not introduce a new shared framework for application patterns solely to make 
 ## Portfolio metrics
 
 Track outcomes across APIs:
+
 - Number of responsibilities mapped and migrated.
 - Number of API/functional parity scenarios passed.
 - New regression defects and escaped defects.

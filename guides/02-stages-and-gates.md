@@ -7,6 +7,7 @@ This lifecycle is intended to be repeatable for each API. The AI agent must not 
 **Goal:** Establish a safe, isolated work area and define what is in scope.
 
 Activities:
+
 - Identify repository, solution, API project(s), shared libraries and runtime entry point.
 - Confirm the project already targets `net10.0`; do not change target framework or turn this work into a .NET 11 upgrade.
 - Check SDK, `global.json`, CI SDK configuration and deployment runtime compatibility.
@@ -25,6 +26,7 @@ Deliverables: scope note, branch name, baseline commit, repository status and kn
 **Goal:** Understand the API as it operates today, not as documentation says it should operate.
 
 Inspect:
+
 - Routes, controllers/Minimal APIs, API versions, DTOs and OpenAPI.
 - Request/response mappings, status codes, headers, errors and serialization options.
 - Authentication, authorization, claims, scopes and policies.
@@ -50,6 +52,7 @@ Deliverables: architecture assessment, responsibility catalogue, API contract in
 **Goal:** Create reproducible evidence of current behaviour and system health.
 
 Activities:
+
 - Run restore/build and all currently configured tests on the baseline.
 - Record pass/fail/skipped counts, durations, warnings and known pre-existing failures.
 - Identify which test categories actually run in the pipeline; do not assume one `dotnet test` command covers everything.
@@ -70,6 +73,7 @@ Deliverables: test baseline, coverage gap analysis, contract fixtures, behaviour
 **Goal:** Decide in-place, hybrid or new host/project based on repository evidence.
 
 Activities:
+
 - Compare the three options using complexity, contract risk, coupling, host quality, testability, operational cost and rollback.
 - Default to hybrid: preserve outward API/deployment boundary, improve internals.
 - Define desired dependency direction and feature/use-case structure.
@@ -87,6 +91,7 @@ Deliverables: architecture decision record (ADR), target architecture, migration
 **Goal:** Establish the target boundary and prove tests can exercise both old and new paths.
 
 Activities:
+
 - Build the smallest target skeleton justified by Stage 3.
 - Preserve route/method/version, request/response DTO shape, error model and auth policy.
 - Configure test host and fake outbound adapters only in the test composition.
@@ -106,6 +111,7 @@ Deliverables: target skeleton, contract tests, test composition, fake adapters, 
 **Goal:** Validate the proposed architecture with one complete, representative use case.
 
 Activities:
+
 - Select pilot from the dependency-aware capability map.
 - Implement actual application logic, persistence and required integrations.
 - Keep DTO/API boundary stable.
@@ -123,6 +129,7 @@ Deliverables: production-capable pilot slice, test evidence, parity report, perf
 **Goal:** Migrate remaining capabilities in the approved dependency order.
 
 For each slice:
+
 1. Read its plan and responsibility/contract evidence.
 2. Confirm prerequisites and test fixtures.
 3. Implement only the slice and essential shared infrastructure.
@@ -145,6 +152,7 @@ Deliverables: completed slices, traceability matrix, updated parity matrix and r
 **Goal:** Remove direct dependencies and obsolete patterns after replacement behaviour is proven.
 
 Potential workstreams:
+
 - MediatR extraction/removal.
 - FluentValidation replacement/retention decision.
 - FluentAssertions replacement.
@@ -165,6 +173,7 @@ Deliverables: package inventory diff, code-reference scan, dependency graph revi
 Run all applicable tests and checks: build, unit, component, integration, contract, acceptance, end-to-end, parity, authorization/security, concurrency/idempotency, resilience/fault, migration/data compatibility and performance.
 
 Review:
+
 - DEV configuration and secret references.
 - Database/schema migration order and backward compatibility.
 - Messaging compatibility and consumer/producer rollout order.
@@ -183,6 +192,7 @@ Deliverables: final verification report, test evidence, parity report, performan
 **Goal:** Validate the candidate in the target DEV environment before QA proceeds.
 
 Activities:
+
 - Deploy only with explicit authorization.
 - Verify startup, health, configuration, auth, connectivity and telemetry.
 - Run DEV smoke tests and safe integration scenarios.

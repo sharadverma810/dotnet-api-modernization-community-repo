@@ -101,6 +101,7 @@ This prevents endpoints or non-HTTP work (for example hosted services and messag
 ## What to put in every plan
 
 Use `templates/plan-template.md`. At minimum it must specify:
+
 - Goal and business rationale.
 - Existing responsibility and behaviour to preserve.
 - Scope and non-goals.

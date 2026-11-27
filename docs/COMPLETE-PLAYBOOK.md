@@ -2,6 +2,8 @@
 
 > This file consolidates the complete reusable playbook. The companion ZIP contains the same content split into individual documents for easier use.
 
+<!-- markdownlint-disable MD025 -->
+
 ---
 
 <!-- BEGIN DOCUMENT: README.md -->
